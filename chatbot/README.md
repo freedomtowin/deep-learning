@@ -9,18 +9,11 @@ The purpose of this application was to see if I could build a "meme-generator" b
 
 
 ## Training
+As always, the data is "dirty". In a free-form chat, there can be multiple conversations going on, bad spelling, emojis based punctuation, etc. I made a simple SQLite3 database to insert new historical chat records over bot sessions.
 
-As always, the data is "dirty". In a free-form chat, there can be multiple conversations going on, bad spelling, emojis based punctuation, etc. The text generation model uses a standard Embedding+LSTM+CRF. 
+The text generation model uses a standard Embedding+LSTM+CRF. For training, I concatenate each seed message with the next 6 potential responses within in a minute, and then create a target variable for each token in the response. I used a special token to separate the messages.
 
-
-
-For training, I concatenate each seed message with the next 6 potential responses within in a minute, and then create a target variable for each token in the response. I used a special token to separate the messages.
-
-
-
- There was also some data processing to remove spam messages and clean up the text\punctuation, both for historical and real-time chat data. For real-time chat bot, I use the last 3 messages in the chat stream as an input prompt to the model. 
-
-
+There was also some data processing to remove spam messages and clean up the text\punctuation, both for historical and real-time chat data. For real-time chat bot, I use the last 3 messages in the chat stream as an input prompt to the model. 
 
 Finally, the message is reformatted and sent to the game client application! 
 
