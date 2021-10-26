@@ -34,5 +34,6 @@ If I were to give this more time, here are some things I would consider:
 
 2. Use an attention layer instead of a LSTM (although, I have only seen attention used for neural translation before)
 
+3. Use a name-entity-resolution (NER) algorithm to figure out where to put punctuation in the output text.
 
 
