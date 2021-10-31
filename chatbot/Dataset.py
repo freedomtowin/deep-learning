@@ -30,7 +30,8 @@ class ProcessChat():
 			return 0
 
 		def advertisments(x):
-			words = ['wts','wtb','guild', 'for sale', 'lf ', 'pst']
+			words = ['wts','wtb','guild', 'for sale', 'lf ',
+					 'm+15', 'gold only', 'goldonly', 'mythic']
 			for w in words:
 				if w in x.lower():
 					return 1
@@ -84,7 +85,7 @@ class CollectData(ProcessChat):
 			keystroke "{USERNAME}"
 			delay 2.0
 			key code TB
-			delay 1.0
+			delay 2.0
 			keystroke "{PASSWORD}" & CR
 			delay 8.0
 			key code ENTR
@@ -114,7 +115,7 @@ class CollectData(ProcessChat):
 						tell application "World of Warcraft" to activate
 						key code ENTR
 						keystroke "/reload" & CR
-						delay 5.0
+						delay 3.0
 					end tell
 				end try
 			end if
@@ -172,7 +173,14 @@ class CollectData(ProcessChat):
 		trade_chat_stg = pd.read_sql(qry,conn)
 		trade_chat_stg.to_sql("trade_chat_db", conn, if_exists='append',index=False)
 		tmp = pd.read_sql('select * from trade_chat_db',conn)
-		return tmp
+		return self.process(tmp)
+		
+	def collectlogs(self):
+		conn = create_database('working')
+		cur = conn.cursor()
+		tmp = pd.read_sql('select * from trade_chat_db',conn)
+		return self.process(tmp)
+		
 		
 	def collectchat(self):
 		exec_applescript(self.reload_wowc)
