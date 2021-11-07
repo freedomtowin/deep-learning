@@ -29,6 +29,6 @@ I used my trusty stock dataset to test these concepts.
 2. Build a data pipeline transform the time window with the Fourier transform
 3. Forecast one of the stocks with the transformed features
 
-![](images/result.png)
+![](images/results.png)
 
 
